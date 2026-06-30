@@ -1,0 +1,11 @@
+{
+  "name": "skills",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "fmt": "bun prettier --write ."
+  }
+}
