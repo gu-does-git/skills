@@ -1,70 +1,90 @@
-# AGENTS.md — Skills Monorepo
+# AGENTS.md — Skills Repo
 
 ## Identity
 
-This is the **skills** monorepo — a public collection of reusable skill modules. Each package under `packages/*` is self-contained and independently usable.
+A public collection of [Agent Skills](https://agentskills.io/) — reusable skill modules that teach AI agents how to work with specific tools, libraries, and frameworks.
+
+Each skill lives in `skills/<name>/` with a `SKILL.md` following the [Agent Skills specification](https://agentskills.io/specification.md).
+
+## Skills
+
+```
+skills/
+├── lodash/              SKILL.md + references/
+├── momentjs/            SKILL.md + references/
+├── bootstrap3/          SKILL.md + references/
+├── fontawesome4/        SKILL.md + references/
+├── angular-ui/          SKILL.md + references/
+├── service-portal/      SKILL.md + references/
+└── sn-sync-widget/      SKILL.md
+```
+
+### SKILL.md Format
+
+Every skill has YAML frontmatter followed by Markdown instructions:
+
+```yaml
+---
+name: <dir-name>          # required, matches directory name
+description: <text>       # required, when to use this skill
+license: <identifier>     # recommended
+metadata:                 # optional
+  <key>: <value>
+---
+```
+
+## Adding a Skill
+
+1. Create `skills/<name>/SKILL.md` with valid frontmatter
+2. Optionally add `references/` for supporting docs
+3. The `name` field in frontmatter **must** match the directory name
+4. Keep SKILL.md under 500 lines — move details to reference files
+
+```bash
+mkdir skills/my-skill
+touch skills/my-skill/SKILL.md
+```
 
 ## Commit Convention
 
-All commits **MUST** follow [Conventional Commits](https://www.conventionalcommits.org/) with [Devmoji](https://github.com/zaaack/devmoji) emoji.
+All commits **MUST** follow [Conventional Commits](https://www.conventionalcommits.org/). Hooks auto-add devmoji and validate.
 
-| Type | Emoji | Usage |
-|---|---|---|
-| `feat` | ✨ | New skill or feature |
-| `fix` | 🐛 | Bug fix |
-| `chore` | 🛠 | Maintenance, tooling, deps |
-| `docs` | 📝 | Documentation |
-| `refactor` | ♻️ | Code restructuring |
-| `perf` | ⚡ | Performance improvement |
-| `test` | ✅ | Tests |
-| `style` | 🎨 | Formatting, whitespace |
-| `build` | 📦 | Build system |
-| `ci` | 👷 | CI config |
-| `revert` | ⏪ | Revert |
+| Type     | Emoji | Usage                  |
+|----------|-------|------------------------|
+| `feat`   | ✨     | New skill or feature   |
+| `fix`    | 🐛     | Bug fix                |
+| `chore`  | 🛠     | Maintenance, tooling   |
+| `docs`   | 📝     | Documentation          |
+| `refactor` | ♻️   | Code restructuring     |
+| `perf`   | ⚡     | Performance            |
+| `test`   | ✅     | Tests                  |
+| `style`  | 🎨     | Formatting             |
+| `build`  | 📦     | Build system           |
+| `ci`     | 👷     | CI config              |
+| `revert` | ⏪     | Revert                 |
 
-**Format:**
 ```
-<emoji> <type>(<scope>): <description>
-```
-
-**Examples:**
-```
-✨ feat(skill-registry): add semantic search
-🐛 fix(auth): handle token expiry edge case
-📝 docs: update API references
+<emoji> <type>(<scope>?): <description>
 ```
 
 ### Enforcement
 
-- `prepare-commit-msg` hook runs `devmoji` to add the emoji
-- `commit-msg` hook runs `commitlint` to validate format
-- Agents: just `git commit -m "feat: message"` — hooks handle the rest
+- `prepare-commit-msg` hook → devmoji adds emoji
+- `commit-msg` hook → commitlint validates conventional format
+- **Agents:** just `git commit -m "feat: message"` — hooks handle the rest
 
-## Workspace
+## Dev Setup
 
-- **Runtime:** Bun 1.3+
-- **Package manager:** `bun` (lockfile: `bun.lock`)
-- **Workspaces:** `packages/*`
-- **Formatting:** Prettier (`bun fmt`)
-
-## Repository Structure
-
-```
-skills/
-├── packages/          # skill packages (one directory per skill)
-│   └── <skill-name>/
-│       ├── package.json
-│       └── src/
-├── .husky/            # git hooks (pre-commit, commit-msg, prepare-commit-msg)
-├── AGENTS.md          # this file
-├── commitlint.config.js
-└── package.json       # root workspace config
+```bash
+bun install     # install dev dependencies (husky, commitlint, devmoji)
+bun fmt         # format with prettier
 ```
 
-## For Agents
+## Tooling
 
-- **Commit directly** with `git commit -m "<type>: <description>"` — hooks validate + add emoji
-- **Install deps** with `bun add <pkg>` (workspace-aware)
-- **Run tests** with `bun test` in a package or `bun test --filter <skill-name>`
-- **Format** with `bun fmt` before committing
-- **New skill** → `mkdir packages/<name>`, create `package.json` with `"private": false`, add to workspace
+| Tool | Purpose |
+|------|---------|
+| Husky | Git hooks |
+| commitlint | Conventional commit validation |
+| devmoji | Automatic emoji in commits |
+| Prettier | Code formatting |
