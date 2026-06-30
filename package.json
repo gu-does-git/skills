@@ -6,7 +6,6 @@
     "packages/*"
   ],
   "scripts": {
-    "fmt": "bun prettier --write .",
     "prepare": "husky"
   },
   "devDependencies": {

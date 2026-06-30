@@ -37,7 +37,6 @@ git clone https://github.com/gu-does-git/skills.git
 
 ```bash
 bun install          # install dev dependencies
-bun fmt              # format with prettier
 ```
 
 Commit hooks enforce [Conventional Commits](https://www.conventionalcommits.org/) with devmoji:
