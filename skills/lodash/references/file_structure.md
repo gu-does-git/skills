@@ -1,0 +1,193 @@
+# Repository File Structure
+
+Total items: 187
+
+```
+📄 .editorconfig
+📄 .gitattributes
+📁 .github
+📄 .gitignore
+📄 .jscsrc
+📄 .markdown-doctest-setup.js
+📄 CHANGELOG
+📄 GOVERNANCE.md
+📄 LICENSE
+📄 README.md
+📄 SECURITY.md
+📁 dist
+📁 doc
+📁 fp
+📄 incident_response_plan.md
+📁 lib
+📄 lodash.js
+📄 package-lock.json
+📄 package.json
+📁 perf
+📄 playwright.config.js
+📄 renovate.json
+📁 test
+📄 threat-model.md
+📁 vendor
+  📄 CONTRIBUTING.md
+  📁 workflows
+  📄 lodash.core.js
+  📄 lodash.core.min.js
+  📄 lodash.fp.js
+  📄 lodash.fp.min.js
+  📄 lodash.js
+  📄 lodash.min.js
+  📄 mapping.fp.js
+  📄 README.md
+  📄 _baseConvert.js
+  📄 _convertBrowser.js
+  📄 _mapping.js
+  📄 placeholder.js
+  📁 common
+  📁 fp
+  📁 main
+  📁 asset
+  📄 index.html
+  📄 perf.js
+  📁 asset
+  📄 backbone.html
+  📄 fp.html
+  📄 index.html
+  📄 playwright-runner.spec.js
+  📄 remove.js
+  📄 test-fp.js
+  📄 test.js
+  📄 underscore.html
+  📁 backbone
+  📁 firebug-lite
+  📁 json-js
+  📁 underscore
+    📄 browser-testing.yml
+    📄 ci-bun.yml
+    📄 ci-dist-sync.yml
+    📄 ci-docs.yml
+    📄 ci-node.yml
+    📄 codeql.yml
+    📄 renovate.yml
+    📄 scorecards.yml
+    📄 file.js
+    📄 mapping.js
+    📄 minify.js
+    📄 uglify.options.js
+    📄 util.js
+    📄 build-dist.js
+    📄 build-doc.js
+    📄 build-modules.js
+    📁 template
+    📄 build-dist.js
+    📄 build-doc.js
+    📄 build-modules.js
+    📄 build-site.js
+    📄 perf-ui.js
+    📄 test-ui.js
+    📄 worker.js
+    📄 LICENSE
+    📄 backbone.js
+    📁 test
+    📄 license.txt
+    📁 skin
+    📁 src
+    📄 json2.js
+    📄 LICENSE
+    📁 test
+    📄 underscore-min.js
+    📄 underscore.js
+      📁 doc
+      📁 modules
+      📄 collection.js
+      📄 events.js
+      📄 model.js
+      📄 noconflict.js
+      📄 router.js
+      📁 setup
+      📄 sync.js
+      📄 view.js
+      📁 xp
+      📄 firebug-lite-debug.js
+      📄 arrays.js
+      📄 chaining.js
+      📄 collections.js
+      📄 cross-document.js
+      📄 functions.js
+      📄 objects.js
+      📄 utility.js
+        📄 wiki.jst
+        📄 _falseOptions.jst
+        📄 _util.jst
+        📄 alias.jst
+        📄 category.jst
+        📄 convert.jst
+        📄 fp.jst
+        📄 module.jst
+        📄 thru.jst
+        📄 dom-setup.js
+        📄 environment.js
+        📄 blank.gif
+        📄 buttonBg.png
+        📄 buttonBgHover.png
+        📄 debugger.css
+        📄 detach.png
+        📄 detachHover.png
+        📄 disable.gif
+        📄 disable.png
+        📄 disableHover.gif
+        📄 disableHover.png
+        📄 down.png
+        📄 downActive.png
+        📄 downHover.png
+        📄 errorIcon-sm.png
+        📄 errorIcon.gif
+        📄 errorIcon.png
+        📄 firebug-1.3a2.css
+        📄 firebug.IE6.css
+        📄 firebug.css
+        📄 firebug.html
+        📄 firebug.png
+        📄 group.gif
+        📄 html.css
+        📄 infoIcon.gif
+        📄 infoIcon.png
+        📄 loading_16.gif
+        📄 min.png
+        📄 minHover.png
+        📄 off.png
+        📄 offHover.png
+        📄 pixel_transparent.gif
+        📄 roundCorner.svg
+        📄 search.gif
+        📄 search.png
+        📄 shadow.gif
+        📄 shadow2.gif
+        📄 shadowAlpha.png
+        📄 sprite.png
+        📄 tabHoverLeft.png
+        📄 tabHoverMid.png
+        📄 tabHoverRight.png
+        📄 tabLeft.png
+        📄 tabMenuCheckbox.png
+        📄 tabMenuPin.png
+        📄 tabMenuRadio.png
+        📄 tabMenuTarget.png
+        📄 tabMenuTargetHover.png
+        📄 tabMid.png
+        📄 tabRight.png
+        📄 textEditorBorders.gif
+        📄 textEditorBorders.png
+        📄 textEditorCorners.gif
+        📄 textEditorCorners.png
+        📄 titlebarMid.png
+        📄 toolbarMid.png
+        📄 tree_close.gif
+        📄 tree_open.gif
+        📄 twistyClosed.png
+        📄 twistyOpen.png
+        📄 up.png
+        📄 upActive.png
+        📄 upHover.png
+        📄 warningIcon.gif
+        📄 warningIcon.png
+```
