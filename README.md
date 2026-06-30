@@ -7,11 +7,12 @@ A public collection of [Agent Skills](https://agentskills.io/) — reusable skil
 | Skill | Description |
 |---|---|
 | [lodash](skills/lodash/) | Lodash utility library — transforms, deep clone, debounce, chaining |
-| [momentjs](skills/momentjs/) | Moment.js date/time parsing, formatting, manipulation, timezones |
 | [bootstrap3](skills/bootstrap3/) | Bootstrap 3 grid, components, JS plugins, forms, responsive utilities |
 | [fontawesome4](skills/fontawesome4/) | Font Awesome v4.7 icon library — 675+ icons |
+| [momentjs](skills/momentjs/) | Moment.js date/time parsing, formatting, manipulation, timezones |
+| [select2](skills/select2/) | Select2 v3 searchable select/tag — AngularJS sync, i18n, full API ref, pitfalls |
 | [angular-ui](skills/angular-ui/) | Angular-UI Bootstrap directives (ui.bootstrap) |
-| [service-portal](skills/service-portal/) | ServiceNow Service Portal widgets, pages, portals, themes |
+| [service-portal](skills/service-portal/) | ServiceNow Service Portal — widgets, Angular providers, theming, troubleshooting |
 | [sn-sync-widget](skills/sn-sync-widget/) | Sync widget files to ServiceNow via Agent API |
 
 ## Format

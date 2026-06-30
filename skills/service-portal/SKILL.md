@@ -174,31 +174,6 @@ function() {
 ```javascript
 // Fetch in server, bind to data — avoids JS parse errors from translated quotes
 data.translatedMsg = gs.getMessage('Some message key');
-```
-
-## Reference Files
-
-Located in `references/`:
-
-| File               | Contents                                | Confidence |
-| ------------------ | --------------------------------------- | ---------- |
-| `documentation.md` | 24 pages covering all major SP concepts | medium     |
-
-### What's in `documentation.md`
-
-Covers:
-
-- `widget_server_script.md` — server-side properties, Glide API usage, `input`/`data` pattern
-- `widget_client_script.md` — Angular controller, `c.server.get()`, `c.data` binding
-- `widget_options.md` — defining option schema, accessing `options.*`, setting defaults
-- `widget_record_watch.md` — `spUtil.recordWatch()` for real-time updates
-- `widget_internationalization.md` — `${}` syntax, `gs.getMessage()`, safe translation patterns
-- `widget_link.md` — Angular link function for direct DOM manipulation (advanced/rare)
-- `widget_dependencies.md` — linking JS/CSS libraries to widgets asynchronously
-- `page_layout.md` — Bootstrap containers/rows/columns, custom flexbox layout
-- `page.md` — page config, page IDs, multi-portal reuse
-- `portal.md` — portal settings, `$scope.portal`, theme config
-- `widget_server_script.md` — server context execution model
 
 ## Conventions & Preferences
 
@@ -474,7 +449,69 @@ Mark "Bootstrap alternative" on the container → removes `.container` class →
 
 ### Widget Dependencies
 
-Add JS/CSS libs via dependency packages (Widget Editor → Related Lists → Dependencies). Loaded async at widget render time.
+Add third-party JS/CSS libraries via dependency packages (Service Portal → Dependencies). Linked to widgets via Related Lists. Loaded async when the widget renders.
+
+**Bundled — do NOT re-add:**
+
+- jQuery
+- AngularJS
+- Bootstrap 3 CSS/JS
+- Bootstrap 3 Glyphicons
+
+**Rules:**
+
+- Lower `order` values load first. Base libraries before plugins.
+- Use minified CDN URLs with version pinning (e.g. `select2@4.1.0`)
+- One dependency per library — share across widgets
+- Always use HTTPS URLs
+
+## Angular Providers
+
+Reusable services, factories, and directives can be shared across widgets via angular providers (`sp_angular_provider` table).
+
+### Types
+
+| Type | Returns | When to Use |
+|------|---------|-------------|
+| `directive` | Directive Definition Object | Custom HTML elements/attributes, reusable UI |
+| `service` | Object with methods | Shared logic, state management, utility functions |
+| `factory` | Object or primitive | Configurable objects, API integration layers |
+
+### Guidelines
+
+- Function name MUST match the `name` field exactly
+- Services and factories must return an object (not `this`, not primitives)
+- Directives must return a Directive Definition Object
+- Link providers to widgets via the widget's angular providers related list
+- Avoid circular dependencies between providers
+
+### Example: shared service
+
+```javascript
+// sp_angular_provider record
+function dataService($http) {
+    return {
+        getRecords: function(table, limit) {
+            return $http.get('/api/now/table/' + table, {
+                params: { sysparm_limit: limit || 10 }
+            });
+        }
+    };
+}
+```
+
+### Usage in a widget
+
+```javascript
+// Widget client script
+api.controller = function (dataService) {
+    var c = this;
+
+    dataService.getRecords('incident', 5).then(function(response) {
+        c.data.records = response.data.result;
+    });
+};
+```
 
 ## Linting Rules (widgets)
 
@@ -538,6 +575,45 @@ $window.open(url);
   </div>
 </div>
 ```
+
+## CSS & Theming
+
+Widget CSS is compiled as SCSS with only the portal theme's `css_variables` injected. Undefined variables are silently dropped — never invent custom names.
+
+**Rules:**
+
+- Never hardcode hex/rgb values — use theme variables (`$brand-primary`, `$text-color`, etc.)
+- Use the spacing scale (`$sp-space-1` through `$sp-space-8`) instead of arbitrary pixel values
+- Every `font-size` must use a typography variable (`$sp-text-xs` through `$sp-text-2xl`)
+- Use Bootstrap 3 grid classes (`col-md-*`, `col-xs-*`). Always add `col-xs-12` for mobile stacking.
+- Never use `!important` — increase selector specificity instead
+- Never use `<br>` for spacing — use margin/padding
+- Always pair inputs with `<label>` elements
+
+Full variable reference in `references/theming-and-ootb.md`.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Portal not accessible | URL suffix conflict | Verify `urlSuffix` is unique |
+| Theme not applying | Wrong theme sys_id | Confirm theme is linked to portal record |
+| Navigation menu hidden | Missing theme/header config | Verify portal has `theme` + `header` configured |
+| Widget blank | JS error or inactive widget | Check browser console, verify widget is active |
+| Data not refreshing | Server script IIFE or `input.action` mismatch | Verify `c.server.update()` matches `input.action` handler |
+| SCSS not compiling | `turnOffScssCompilation: true` | Enable SCSS compilation on theme |
+| Third-party lib not loading | Wrong `order` or not linked | Base libs first (lower `order`), confirm dependency linked to widget |
+| Provider undefined | Not injected in widget config | Add to angular providers list |
+
+---
+
+## Reference Files
+
+| File | Contents |
+|------|----------|
+| `references/theming-and-ootb.md` | SCSS variables, spacing/typography scales, grid patterns, OOTB widgets/pages, menu types, troubleshooting |
 
 ---
 
